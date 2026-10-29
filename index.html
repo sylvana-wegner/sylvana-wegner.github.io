@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sylvana Wegner – Fachinformatikerin in Ausbildung</title>
+  <!-- Verhindert, dass Suchmaschinen die Seite aufnehmen. Löschen, wenn du gefunden werden willst. -->
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #0D0221;
+      --panel: #1A0B3A;
+      --text: #E8E6FF;
+      --muted: #A39DD0;
+      --cyan: #05D9E8;
+      --magenta: #FF2A6D;
+      --pixel: "Press Start 2P", "Courier New", monospace;
+      --mono: "IBM Plex Mono", "Courier New", monospace;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--night); }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 1rem;
+      line-height: 1.7;
+      background: var(--night);
+    }
+    /* Leichte Röhrenmonitor-Linien über der ganzen Seite */
+    body::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.035) 0 1px, transparent 1px 3px);
+    }
+    a { color: var(--cyan); text-underline-offset: 4px; }
+    a:hover { color: var(--magenta); }
+    a:focus-visible { outline: 2px solid var(--magenta); outline-offset: 3px; }
+
+    /* Kopfbereich mit Retro-Gitterboden */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 5rem 1.5rem 9rem;
+      background: linear-gradient(to bottom, var(--night) 0%, #2B0B4F 70%, #4A0E5C 100%);
+    }
+    .hero::after {
+      content: ""; position: absolute; left: -50%; right: -50%; bottom: -2rem; height: 9rem;
+      background-image:
+        linear-gradient(to right, rgba(5,217,232,0.55) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(5,217,232,0.55) 1px, transparent 1px);
+      background-size: 3rem 1.5rem;
+      transform: perspective(14rem) rotateX(60deg);
+      transform-origin: bottom;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 44rem; margin: 0 auto; }
+    .hero h1 {
+      font-family: var(--pixel);
+      font-size: clamp(1.6rem, 6vw, 2.8rem);
+      line-height: 1.35;
+      margin: 0 0 1.5rem;
+      text-shadow: 3px 0 var(--magenta), -3px 0 var(--cyan);
+    }
+    .hero p { margin: 0; max-width: 34rem; font-size: 1.05rem; }
+    .prompt::before { content: "> "; color: var(--magenta); }
+    .cursor {
+      display: inline-block; width: 0.6em; height: 1.1em; margin-left: 0.2em;
+      background: var(--cyan); vertical-align: text-bottom;
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+    main { max-width: 44rem; margin: 0 auto; padding: 1rem 1.5rem 5rem; }
+    h2 {
+      font-family: var(--pixel); font-size: 1rem; line-height: 1.6;
+      color: var(--cyan); margin: 4rem 0 1.5rem;
+    }
+    h2::before { content: "// "; color: var(--magenta); }
+
+    /* Streckenplan als Neon-Linie */
+    .route { list-style: none; margin: 0; padding: 0; position: relative; }
+    .route::before {
+      content: ""; position: absolute; left: 0.55rem; top: 0.5rem; bottom: 0.5rem;
+      width: 4px; background: var(--magenta);
+      box-shadow: 0 0 10px var(--magenta), 0 0 22px rgba(255,42,109,0.6);
+    }
+    .stop { position: relative; padding: 0 0 2rem 2.75rem; }
+    .stop::before {
+      content: ""; position: absolute; left: 0; top: 0.3rem;
+      width: 1.15rem; height: 1.15rem;
+      background: var(--night); border: 3px solid var(--magenta);
+    }
+    .stop.now::before { background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+    .stop.next::before { border-style: dashed; border-color: var(--cyan); }
+    .stop.next { padding-bottom: 0; }
+    .stop h3 { margin: 0; font-size: 1.05rem; font-weight: 600; }
+    .stop .when { color: var(--muted); font-size: 0.9rem; }
+    .stop p { margin: 0.3rem 0 0; }
+
+    /* Projekte im Terminal-Stil */
+    .projects { display: grid; gap: 1.25rem; }
+    .project {
+      background: var(--panel); padding: 1.25rem 1.4rem;
+      border-left: 3px solid var(--cyan);
+    }
+    .project h3 { margin: 0; font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .project p { margin: 0.35rem 0 0.5rem; }
+    .tools { font-size: 0.85rem; color: var(--magenta); }
+    .tools::before { content: "$ "; color: var(--muted); }
+
+    .plain { list-style: none; padding: 0; margin: 0; }
+    .plain li { margin-bottom: 0.6rem; }
+    .plain li::before { content: "▸ "; color: var(--magenta); }
+
+    .note {
+      margin-top: 1.25rem; padding: 1rem 1.25rem;
+      border: 1px dashed var(--cyan); font-size: 0.95rem;
+    }
+    footer { margin-top: 4rem; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ANPASSEN: Schreib den Satz unter deinem Namen in deinen eigenen Worten -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Sylvana<br>Wegner</h1>
+      <p class="prompt">Fachinformatikerin für Systemintegration in Ausbildung, Dresden. Früher medizinische Hochtechnologie, heute zuverlässige IT.<span class="cursor" aria-hidden="true"></span></p>
+    </div>
+  </header>
+
+<main>
+  <section>
+    <h2>Über mich</h2>
+    <!-- ANPASSEN: Das ist dein Anschreiben in kurz. Bitte komplett in deinen Worten neu schreiben -->
+    <p>Mit 41 Jahren wage ich den Schritt in die IT, nachdem ich viele Jahre in der Medizin gearbeitet habe. Technologie hat mich schon mein ganzes Leben fasziniert und jetzt mache ich meine Begeisterung zum Beruf. Ich bin jemand, der sich von Problemen nicht abschrecken lässt, sondern so lange nach einer Lösung sucht bis er einen Weg gefunden hat. Denn für mich gibt es keine unlösbaren Probleme, sondern manchmal Wege die etwas mehr Kreativität erfordern. 
+    Und wenn der direkte Weg nicht klappt, finde ich halt einen Umweg. :-)</p>
+  </section>
+
+  <section>
+    <h2>Mein Weg</h2>
+    <!-- ANPASSEN: Jahreszahlen und Beschreibungen ergänzen -->
+    <ol class="route">
+      <li class="stop">
+        <h3>Medizinisch-technische Radiologieassistentin</h3>
+        <div class="when">[von] bis [bis]</div>
+        <p>Arbeit mit Röntgen, CT und MRT, wo Technik zuverlässig laufen muss, weil Menschen davon abhängen.</p>
+      </li>
+      <li class="stop">
+        <h3>Weiterbildung zur Pflegedienstleitung</h3>
+        <div class="when">2021</div>
+        <p>Facharbeit über Technologien in der Altenpflege.</p>
+      </li>
+      <li class="stop">
+        <h3>Qualitätsmanagerin</h3>
+        <div class="when">[von] bis [bis]</div>
+        <p>Prozesse gestalten, Normen umsetzen, sauber dokumentieren.</p>
+      </li>      <li class="stop now">
+        <h3>Umschulung zur Fachinformatikerin für Systemintegration</h3>
+        <div class="when">seit [Jahr], Berufsförderungswerk Dresden</div>
+        <p>Netzwerktechnik, Linux, Virtualisierung, Programmierung mit Python und Java.</p>
+      </li>
+      <li class="stop next">
+        <h3>Nächster Halt: Praktikum</h3>
+        <p>Für  mein Praktikum möchte ich viel lernen, praktische Erfahrungen sammeln und neue Bereiche der IT entdecken. Besonders interessieren mich IT-Sicherheit, Abwehr von Angriffen und Cloud-Technologien. Ich möchte meine Kreativität und mein analytisches Denken einsetzen, Schwachstellen aufspüren und eigene Lösungen entwickeln, statt dauerhaft gleichbleibende Aufgaben abzuarbeiten, suche ich Herausforderungen, an denen ich wachsen und aktiv mitgestalten kann.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Projekte</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>Eigenes NAS mit Foto-Cloud</h3>
+        <p>Ein ausgedienter Büro-PC wurde zum Netzwerkspeicher. Er ersetzt die iCloud für die Familienfotos und ist von unterwegs sicher erreichbar, ohne offen im Internet zu stehen.</p>
+        <div class="tools">OpenMediaVault, Docker, Immich, Tailscale, SMB</div>
+      </article>
+      <article class="project">
+        <h3>Zeiterfassung mit RFID</h3>
+        <p>Gruppenprojekt: Mitarbeitende stempeln mit einer Karte ein und aus. Meine Aufgabe war die Vorbereitung des Raspberry Pi.</p>
+        <div class="tools">Raspberry Pi 4, RC522 RFID-Leser</div>
+      </article>
+      <article class="project">
+        <h3>Taschenrechner in Java</h3>
+        <p>Ein Taschenrechner mit grafischer Oberfläche im Stil des Windows-Rechners.</p>
+        <div class="tools">Java, Swing, WindowBuilder</div>
+      </article>
+      <article class="project">
+        <h3>Linux für Kinder</h3>
+        <p>Ein kindgerechter Laptop mit freier Software für meine Tochter.</p>
+        <div class="tools">Linux</div>
+      </article>
+      <article class="project">
+        <!-- ANPASSEN: kurze Beschreibung ergänzen -->
+        <h3>Raspberry Pi Handheld</h3>
+        <p>[kleiner Text brauche ich da noch... eventuell foto]</p>
+        <div class="tools">Raspberry Pi</div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Podcast und Events</h2>
+    <ul class="plain">
+      <!-- ANPASSEN: deinen Spotify-Link einsetzen -->
+      <li><a href="https://open.spotify.com/episode/0dSzQgwaG1xJbfjvOjeeyt?si=1951a153b0f147d2">Mein Podcast auf Spotify</a></li>
+      <li>über Spotify aufrufbar</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Dokumente</h2>
+    <ul class="plain">
+      <      <li><a href="dokumente/unterlagen.pdf">Lebenslauf und Zeugnisse (PDF, mit Passwort geschützt)</a></li>
+      <li><a href="dokumente/facharbeit.pdf">Facharbeit: Technologien in der Altenpflege (PDF)</a></li>
+    </ul>
+        <div class="note">Das Passwort für meine Unterlagen bekommen Sie persönlich von mir.</div>
+  </section>
+
+  <section>
+    <h2>Kontakt</h2>
+    <!-- ANPASSEN: deine E-Mail-Adresse zweimal eintragen -->
+    <p><a href="mailto:sylvana.dietz@gmx.de">[DEINE-E-MAIL]</a></p>
+  </section>
+
+  <footer>Selbst gebaut und gehostet mit GitHub Pages.</footer>
+</main>
+</body>
+</html>
