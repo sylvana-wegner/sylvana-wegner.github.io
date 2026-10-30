@@ -40,22 +40,63 @@
     a:hover { color: var(--magenta); }
     a:focus-visible { outline: 2px solid var(--magenta); outline-offset: 3px; }
 
-    /* Kopfbereich mit Retro-Gitterboden */
-        /* Kopfbereich mit Retro-Gitterboden */
+    /* Kopfbereich mit 3D-Gitterboden */
     .hero {
       position: relative; overflow: hidden;
-      padding: 6rem 1.5rem 14rem;
-      background: linear-gradient(to bottom, var(--night) 0%, #2B0B4F 50%, #6A1470 100%);
+      padding: 6rem 1.5rem 16rem;
+      background: linear-gradient(to bottom, var(--night) 0%, #2B0B4F 45%, #6A1470 100%);
     }
-    .hero::after {
-      content: ""; position: absolute; left: -50%; right: -50%; bottom: -3rem; height: 14rem;
+    .grid-wrap {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 15rem;
+      perspective: 240px; perspective-origin: 50% 0;
+      overflow: hidden;
+    }
+    .grid-wrap::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; z-index: 2;
+      background: var(--magenta); box-shadow: 0 0 12px var(--magenta), 0 0 30px var(--magenta);
+    }
+    .grid-wrap::after {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, #5A1268 0%, rgba(90,18,104,0) 40%);
+    }
+    .grid {
+      position: absolute; left: -100%; right: -100%; top: 0; height: 300%;
       background-image:
-        linear-gradient(to right, rgba(5,217,232,0.6) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(5,217,232,0.6) 1px, transparent 1px);
-      background-size: 3.5rem 1.75rem;
-      transform: perspective(16rem) rotateX(60deg);
-      transform-origin: bottom;
+        linear-gradient(to right, rgba(5,217,232,0.75) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(5,217,232,0.75) 2px, transparent 2px);
+      background-size: 60px 60px;
+      transform-origin: 50% 0;
+      transform: rotateX(68deg);
+      animation: grid-move 1.4s linear infinite;
     }
+    @keyframes grid-move { to { background-position: 0 60px; } }
+
+    /* Pixel-Figur, die reinläuft, sich umdreht und wieder geht */
+    .walker {
+      position: absolute; bottom: 2.5rem; left: -15%; z-index: 3;
+      width: 72px; animation: walk 14s linear infinite;
+    }
+    .walker-turn { animation: turn 14s steps(1) infinite; }
+    .walker-img { display: block; width: 72px; height: 96px; }
+    .leg-b { visibility: hidden; animation: step 0.4s steps(1) infinite; }
+    .leg-a { animation: step 0.4s steps(1) infinite reverse; }
+    @keyframes step { 50% { visibility: visible; } }
+    @keyframes walk {
+      0%   { left: -15%; }
+      35%  { left: 60%; }
+      55%  { left: 60%; }
+      90%  { left: -15%; }
+      100% { left: -15%; }
+    }
+    @keyframes turn {
+      0%   { transform: scaleX(1); }
+      45%  { transform: scaleX(-1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .grid, .walker, .walker-turn, .leg-a, .leg-b { animation: none; }
+      .walker { left: 60%; }
+    }
+
     .hero-inner { position: relative; z-index: 1; max-width: 44rem; margin: 0 auto; }
      .hero h1 {
       font-family: var(--pixel);
@@ -127,10 +168,8 @@
 
   <!-- ANPASSEN: Schreib den Satz unter deinem Namen in deinen eigenen Worten -->
   <header class="hero">
-    <div class="hero-inner">
-      <h1>Sylvana<br>Wegner</h1>
-      <p class="prompt">Fachinformatikerin für Systemintegration in Ausbildung, Dresden. Früher medizinische Hochtechnologie, heute zuverlässige IT.<span class="cursor" aria-hidden="true"></span></p>
-    </div>
+        <div class="grid-wrap" aria-hidden="true"><div class="grid"></div></div>
+    <div class="walker" aria-hidden="true"><div class="walker-turn"><svg class="walker-img" viewBox="0 0 12 16" shape-rendering="crispEdges"><path fill="#FF2A6D" d="M4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM7 0h1v1h-1zM3 1h1v1h-1zM4 1h1v1h-1zM5 1h1v1h-1zM6 1h1v1h-1zM7 1h1v1h-1zM8 1h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM1 5h1v1h-1zM2 5h1v1h-1zM1 6h1v1h-1zM1 7h1v1h-1z"/><path fill="#F5C9A6" d="M5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM4 3h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1z"/><path fill="#05D9E8" d="M5 3h1v1h-1zM6 3h1v1h-1zM7 3h1v1h-1zM8 3h1v1h-1zM5 7h1v1h-1zM5 8h1v1h-1zM5 9h1v1h-1z"/><path fill="#7B3FE4" d="M4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1z"/><g class="leg-a"><path fill="#2E2A5C" d="M4 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM7 11h1v1h-1zM4 12h1v1h-1zM7 12h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM8 13h1v1h-1zM3 14h1v1h-1zM8 14h1v1h-1zM9 14h1v1h-1z"/><path fill="#FF2A6D" d="M2 15h1v1h-1zM3 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1z"/></g><g class="leg-b"><path fill="#2E2A5C" d="M4 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM7 11h1v1h-1zM4 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM6 13h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1z"/><path fill="#FF2A6D" d="M4 15h1v1h-1zM5 15h1v1h-1zM6 15h1v1h-1z"/></g></svg></div></div>
   </header>
 
 <main>
