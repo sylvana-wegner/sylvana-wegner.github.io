@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sylvana Wegner – Fachinformatikerin in Ausbildung</title>
-  <!-- Verhindert, dass Suchmaschinen die Seite aufnehmen. Löschen, wenn du gefunden werden willst. -->
   <meta name="robots" content="noindex">
   <meta name="color-scheme" content="dark">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* Schriften liegen im eigenen Ordner fonts, ohne Verbindung zu Google (Lizenz: SIL OFL, siehe fonts/) */
+    @font-face { font-family: "Press Start 2P"; src: url("fonts/PressStart2P-Regular.woff2") format("woff2"); font-display: swap; }
+    @font-face { font-family: "IBM Plex Mono"; font-weight: 400; src: url("fonts/IBMPlexMono-Regular.woff2") format("woff2"); font-display: swap; }
+    @font-face { font-family: "IBM Plex Mono"; font-weight: 600; src: url("fonts/IBMPlexMono-SemiBold.woff2") format("woff2"); font-display: swap; }
     :root {
       --night: #0D0221;
       --panel: #1A0B3A;
@@ -174,11 +174,15 @@
     .reveal summary::-webkit-details-marker { display: none; }
     .reveal summary::before { content: "> "; color: var(--magenta); }
     .reveal[open] summary { margin-bottom: 0.6rem; }
+    /* Kenntnisse auf einen Blick */
+    .skills { display: grid; gap: 1rem; }
+    .skills h3 { margin: 0 0 0.4rem; font-size: 0.95rem; font-weight: 600; color: var(--muted); }
+    .tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tags li { border: 1px solid var(--cyan); padding: 0.15rem 0.6rem; font-size: 0.85rem; }
   </style>
 </head>
 <body>
 
-  <!-- ANPASSEN: Schreib den Satz unter deinem Namen in deinen eigenen Worten -->
   <header class="hero">
         <div class="hero-inner">
       <h1>Sylvana<br>Wegner</h1>
@@ -190,7 +194,6 @@
 <main>
   <section>
     <h2>Über mich</h2>
-    <!-- ANPASSEN: Das ist dein Anschreiben in kurz. Bitte komplett in deinen Worten neu schreiben -->
     <p>Mit 41 Jahren wage ich den Schritt in die IT, nachdem ich viele Jahre in der Medizin gearbeitet habe. Technologie hat mich schon mein ganzes Leben fasziniert und jetzt mache ich meine Begeisterung zum Beruf. Ich bin jemand, der sich von Problemen nicht abschrecken lässt, sondern so lange nach einer Lösung sucht bis sie einen Weg gefunden hat. Denn für mich gibt es keine unlösbaren Probleme, sondern manchmal Wege, die etwas mehr Kreativität erfordern. 
     Und wenn der direkte Weg nicht klappt, finde ich halt einen Umweg. :-)</p>
     <details class="reveal"><summary>Foto von mir anzeigen</summary><img src="medien/portrait.jpg" alt="Porträt von Sylvana Wegner" loading="lazy"></details>
@@ -198,7 +201,6 @@
 
   <section>
     <h2>Mein Weg</h2>
-    <!-- ANPASSEN: Jahreszahlen und Beschreibungen ergänzen -->
     <ol class="route">
       <li class="stop">
         <h3>Medizinisch-technische Radiologieassistentin</h3>
@@ -221,9 +223,19 @@
       </li>
       <li class="stop next">
         <h3>Nächster Halt: Praktikum</h3>
-        <p>Für  mein Praktikum möchte ich viel lernen, praktische Erfahrungen sammeln und neue Bereiche der IT entdecken. Besonders interessieren mich IT-Sicherheit, Abwehr von Angriffen und Cloud-Technologien. Ich möchte meine Kreativität und mein analytisches Denken einsetzen, Schwachstellen aufspüren und eigene Lösungen entwickeln. Ich suche Herausforderungen, an denen ich wachsen und aktiv mitgestalten kann.</p>
+        <p>Für mein Praktikum möchte ich viel lernen, praktische Erfahrungen sammeln und neue Bereiche der IT entdecken. Besonders interessieren mich IT-Sicherheit, Abwehr von Angriffen und Cloud-Technologien. Ich möchte meine Kreativität und mein analytisches Denken einsetzen, Schwachstellen aufspüren und eigene Lösungen entwickeln. Ich suche Herausforderungen, an denen ich wachsen und aktiv mitgestalten kann.</p>
       </li>
     </ol>
+  </section>
+
+  <section>
+    <h2>Kenntnisse</h2>
+    <div class="skills">
+      <div><h3>Systeme und Netzwerk</h3><ul class="tags"><li>Linux (Debian, Mint)</li><li>OpenMediaVault</li><li>Proxmox</li><li>Docker</li><li>DHCP, DNS</li><li>VPN (Tailscale, WireGuard)</li><li>SMB</li></ul></div>
+      <div><h3>Programmierung und Web</h3><ul class="tags"><li>Python</li><li>Java</li><li>SQL (SQLite)</li><li>HTML, CSS</li><li>Git, GitHub</li></ul></div>
+      <div><h3>Hardware</h3><ul class="tags"><li>Raspberry Pi</li><li>Löten</li><li>Hardware-Umbauten</li></ul></div>
+      <div><h3>Methoden</h3><ul class="tags"><li>Qualitätsmanagement</li><li>Prozessdokumentation</li><li>Fehleranalyse</li></ul></div>
+    </div>
   </section>
 
   <section>
@@ -245,21 +257,20 @@
         <div class="tools">Java, Swing, WindowBuilder</div>
       </article>
       <article class="project">
-        <h3>Arcade-Automaten (Messeprojekt)</h3>
+        <h3>Arcade-Automat (Messeprojekt)</h3>
         <div class="media"><img src="medien/arcade.jpg" alt="Selbst gebauter Arcade-Automat" loading="lazy"></div>
-        <p>Im Rahmen des Messe-Projekt des BFW entstanden und umgesetzt</p>
-        <div class="tools">[Technik, z. B. Raspberry Pi]</div>
+        <p>Für die Messe am BFW hat ein Kollege diesen Arcade-Automaten gebaut, ich habe bei der Umsetzung mitgewirkt. Mein eigener Beitrag zur Messe ist das kleine Gegenstück: der Hello-Kitty-Laptop.</p>
+        <div class="tools">Arcade-Joysticks, Taster, Retro-Gaming-System</div>
       </article>      <article class="project">
-        <h3>Linux für Kinder</h3>
+        <h3>Hello-Kitty-Laptop (Messeprojekt)</h3>
         <div class="media">
           <img src="medien/kinder-pc.jpg" alt="Umgebauter Kinder-Laptop mit Raspberry Pi und Controller" loading="lazy">
           <img src="medien/kinder-pc-prototyp.jpg" alt="Prototyp mit Display und Raspberry Pi" loading="lazy">
           <video src="medien/kinder-pc.mp4" autoplay muted loop playsinline></video>
-        </div>        <p>Ein kindgerechter Laptop mit freier Software für meine Tochter.</p>
-        <div class="tools">Linux</div>
+        </div>        <p>Mein Beitrag zur Messe am BFW: In einen ausgedienten Kinder-Lernlaptop habe ich einen Raspberry Pi mit Display eingebaut. Daraus wurde ein Retro-Spielecomputer mit freier Software für kleine Kunden, gesteuert mit einem Mini-Controller.</p>
+        <div class="tools">Raspberry Pi, RGB-LCD-Display, Linux, Bluetooth-Controller</div>
       </article>
       <article class="project">
-        <!-- ANPASSEN: kurze Beschreibung ergänzen -->
                <h3>Cyberdeck in der Clutch</h3>
         <div class="media"><video src="medien/cyberdeck.mp4" autoplay muted loop playsinline></video></div>
         <details class="reveal"><summary>Foto vom Zusammenbau anzeigen</summary><img src="medien/cyberdeck-bau.jpg" alt="Beim Löten am Cyberdeck" loading="lazy"></details>
@@ -272,7 +283,6 @@
   <section>
     <h2>Podcast</h2>
     <ul class="plain">
-      <!-- ANPASSEN: deinen Spotify-Link einsetzen -->
       <li><a href="https://open.spotify.com/episode/0dSzQgwaG1xJbfjvOjeeyt?si=1951a153b0f147d2">Mein Gastauftritt auf Spotify</a></li>
   
     </ul>
@@ -289,11 +299,10 @@
 
   <section>
     <h2>Kontakt</h2>
-    <!-- ANPASSEN: deine E-Mail-Adresse zweimal eintragen -->
-    <p><a href="mailto:sylvana.dietz@gmx.de">[MEINE-E-MAIL-ADRESSE]</a></p>
+    <p><a href="mailto:sylvana.dietz@gmx.de">E-Mail schreiben</a></p>
   </section>
 
-  <footer>Selbst gebaut und gehostet mit GitHub Pages.</footer>
+  <footer>Selbst gebaut und gehostet mit GitHub Pages. Stand: Oktober 2026</footer>
 </main>
 </body>
 </html>
