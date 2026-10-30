@@ -20,7 +20,7 @@
       --magenta: #FF2A6D;
       --pixel: "Press Start 2P", "Courier New", monospace;
       --mono: "IBM Plex Mono", "Courier New", monospace;
-    }
+    }            
     * { box-sizing: border-box; }
     html { background: var(--night); }
     body {
@@ -162,6 +162,18 @@
       border: 1px dashed var(--cyan); font-size: 0.95rem;
     }
     footer { margin-top: 4rem; color: var(--muted); font-size: 0.85rem; }
+    /* Fotos und Videos */
+    .media { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; margin: 0.75rem 0; }
+    .media img, .media video, .reveal img {
+      display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover;
+      border: 1px solid var(--cyan);
+    }
+    .reveal { margin: 0.75rem 0; }
+    .reveal img { max-width: 280px; }
+    .reveal summary { cursor: pointer; color: var(--cyan); font-size: 0.9rem; list-style: none; }
+    .reveal summary::-webkit-details-marker { display: none; }
+    .reveal summary::before { content: "> "; color: var(--magenta); }
+    .reveal[open] summary { margin-bottom: 0.6rem; }
   </style>
 </head>
 <body>
@@ -181,6 +193,7 @@
     <!-- ANPASSEN: Das ist dein Anschreiben in kurz. Bitte komplett in deinen Worten neu schreiben -->
     <p>Mit 41 Jahren wage ich den Schritt in die IT, nachdem ich viele Jahre in der Medizin gearbeitet habe. Technologie hat mich schon mein ganzes Leben fasziniert und jetzt mache ich meine Begeisterung zum Beruf. Ich bin jemand, der sich von Problemen nicht abschrecken lässt, sondern so lange nach einer Lösung sucht bis sie einen Weg gefunden hat. Denn für mich gibt es keine unlösbaren Probleme, sondern manchmal Wege, die etwas mehr Kreativität erfordern. 
     Und wenn der direkte Weg nicht klappt, finde ich halt einen Umweg. :-)</p>
+    <details class="reveal"><summary>Foto von mir anzeigen</summary><img src="medien/portrait.jpg" alt="Porträt von Sylvana Wegner" loading="lazy"></details>
   </section>
 
   <section>
@@ -232,14 +245,25 @@
         <div class="tools">Java, Swing, WindowBuilder</div>
       </article>
       <article class="project">
+        <h3>Arcade-Automaten (Messeprojekt)</h3>
+        <div class="media"><img src="medien/arcade.jpg" alt="Selbst gebauter Arcade-Automat" loading="lazy"></div>
+        <p>Im Rahmen des Messe-Projekt des BFW entstanden und umgesetzt</p>
+        <div class="tools">[Technik, z. B. Raspberry Pi]</div>
+      </article>      <article class="project">
         <h3>Linux für Kinder</h3>
-        <p>Ein kindgerechter Laptop mit freier Software für meine Tochter.</p>
+        <div class="media">
+          <img src="medien/kinder-pc.jpg" alt="Umgebauter Kinder-Laptop mit Raspberry Pi und Controller" loading="lazy">
+          <img src="medien/kinder-pc-prototyp.jpg" alt="Prototyp mit Display und Raspberry Pi" loading="lazy">
+          <video src="medien/kinder-pc.mp4" autoplay muted loop playsinline></video>
+        </div>        <p>Ein kindgerechter Laptop mit freier Software für meine Tochter.</p>
         <div class="tools">Linux</div>
       </article>
       <article class="project">
         <!-- ANPASSEN: kurze Beschreibung ergänzen -->
         <h3>Raspberry Pi Handheld</h3>
-        <p>[kleiner Text brauche ich da noch... eventuell foto]</p>
+        div class="media"><video src="medien/cyberdeck.mp4" autoplay muted loop playsinline></video></div>
+        <details class="reveal"><summary>Foto vom Zusammenbau anzeigen</summary><img src="medien/cyberdeck-bau.jpg" alt="Beim Löten am Cyberdeck" loading="lazy"></details>
+    <p>[kleiner Text brauche ich da noch... eventuell foto]</p>
         <div class="tools">Raspberry Pi</div>
       </article>
     </div>
